@@ -5,7 +5,8 @@ class Contact extends TPage
 	public function onLoad($param)
 	{
 		parent::onLoad($param);
-		$this->Site = PagesRecord::finder()->findByPk(8);
+		$id = 8;
+		$this->Site = PagesRecord::finder()->findByPk($id);
 		$this->confirmLabel->setCssClass ( 'alertMessage' );
 	}
 	
@@ -15,9 +16,9 @@ class Contact extends TPage
 		diE();
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/plain; charset=utf-8' . "\r\n";
-		$headers .= "From: AquaProjekt <kontakt@ledwood.pl>\r\n";
-		$subject = "Fromularz kontaktowy : AquaProjekt";
-		 $to = $this->Email->SafeText.', kontakt@aquaprojekt.pl';
+		$headers .= "From: AquaProjekt <adres@email.pl>\r\n";
+		$subject = "Fromularz kontaktowy : NAZWA PROJEKTU";
+		 $to = $this->Email->SafeText.', adres@email.pl';
 		$tresc = "
 		imię i nazwisko / firma : ".$this->Name->SafeText."
 		mail : ".$this->Email->SafeText."
