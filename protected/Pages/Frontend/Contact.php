@@ -13,10 +13,9 @@ class Contact extends TPage
 	
 	public function sendMessage($sender,$param)
 	{
-		diE();
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/plain; charset=utf-8' . "\r\n";
-		$headers .= "From: AquaProjekt <adres@email.pl>\r\n";
+		$headers .= "From: NAZWA PROJEKTU <adres@email.pl>\r\n";
 		$subject = "Fromularz kontaktowy : NAZWA PROJEKTU";
 		 $to = $this->Email->SafeText.', adres@email.pl';
 		$tresc = "
@@ -25,8 +24,7 @@ class Contact extends TPage
 		treść : ".$this->Message->SafeText."
 			
 		";
-		
-		die();
+
 	
 		$this->confirmLabel->setVisible ( true );
 		if( @mail($to, $subject , $tresc, $headers ) ) {
