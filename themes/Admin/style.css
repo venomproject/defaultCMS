@@ -1,0 +1,91 @@
+#bodyContent {
+	position: absolute;
+	width: 100%;
+}
+
+.photoList li:hover img {
+	opacity: 0.4;
+	filter: alpha(opacity = 40);
+}
+
+.photoList li {
+	border: 1px solid #f39c12;
+	margin: 1%;
+	width: 18% !important;
+	cursor: pointer;
+}
+
+.TColorPicker.FullColorPicker {
+	z-index: 999;
+}
+
+.example-modal {
+	display: none;
+	position: relative;
+}
+
+.modal-dialog {
+	width: auto !important;
+	margin: 10px  !important;
+}
+
+.example-modal .modal {
+	position: relative;
+	top: auto;
+	bottom: auto;
+	right: auto;
+	left: auto;
+	display: block;
+	z-index: 1;
+	background: transparent !important;
+}
+
+.modal-body {
+	overflow: hidden;
+}
+
+#prevModalSrc {
+	max-width: 100%;
+	margin-top: 10%;
+}
+
+.bg-red, .bg-yellow, .bg-aqua, .bg-blue, .bg-light-blue, .bg-green, .bg-navy, .bg-teal, .bg-olive, .bg-lime, .bg-orange, .bg-fuchsia, .bg-purple, .bg-maroon, .bg-black, .bg-red-active, .bg-yellow-active, .bg-aqua-active, .bg-blue-active, .bg-light-blue-active, .bg-green-active, .bg-navy-active, .bg-teal-active, .bg-olive-active, .bg-lime-active, .bg-orange-active, .bg-fuchsia-active, .bg-purple-active, .bg-maroon-active, .bg-black-active, .callout.callout-danger, .callout.callout-warning, .callout.callout-info, .callout.callout-success, .alert-success, .alert-danger, .alert-error, .alert-warning, .alert-info, .label-danger, .label-info, .label-waring, .label-primary, .label-success, .modal-primary .modal-body, .modal-primary .modal-header, .modal-primary .modal-footer, .modal-warning .modal-body, .modal-warning .modal-header, .modal-warning .modal-footer, .modal-info .modal-body, .modal-info .modal-header, .modal-info .modal-footer, .modal-success .modal-body, .modal-success .modal-header, .modal-success .modal-footer, .modal-danger .modal-body, .modal-danger .modal-header, .modal-danger .modal-footer{
+	overflow: hidden;
+}
+
+
+.TDatePicker_default{
+    
+    width: inherit !important;
+    overflow: hidden !important;
+    height: auto !important;
+}
+
+.TDatePicker_default .hover{
+border:1px solid #000000 !important;
+background: #cccccc !important;
+}
+
+.TDatePicker_default .selected{
+background: #000000 !important;
+border:1px solid #000000 !important;
+}
+
+
+li.act ul{
+	display: block !important;
+	color:#ffffff;
+}
+
+.tableSettings input{
+	width: 100%;
+}
+
+.delete_row a{
+	color:red;
+}
+
+
+.edit_row a{
+	color:green;
+}
