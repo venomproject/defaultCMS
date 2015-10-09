@@ -1,0 +1,40 @@
+<com:TContent ID="content">
+
+<div class="row"> 
+	<com:TRepeater ID="Sites"  AllowPaging="true" PageSize="3" >
+		<prop:ItemTemplate>
+
+<div class="col-xs-12 col-md-4 col-sm-6" id="masterProducts">
+<img src="/UserFiles/Pages/<%=$this->Data->MasterPhoto == 'nophoto.png' ? $this->Data->MasterPhoto : $this->Data->ID.'/thumb/'.$this->Data->MasterPhoto->Name  %>" alt="<%= $this->Data->Name %>"  class="img-responsive" />
+        <a href="<%=$this->Service->constructUrl('Show', array('id' => $this->Data->ID)) %>" ><%= $this->Data->Name %></a>
+</div>
+		</prop:ItemTemplate>
+	</com:TRepeater>
+</div>	
+<div class="title-box clearfix "> 
+<h2 class="title-box_primary">Galeria</h2>
+</div>
+	
+			
+<ul id="gallery"  >
+
+
+<com:TRepeater ID="GalleryHome"  AllowPaging="true"  >
+		<prop:ItemTemplate>
+		
+		
+<li class="col-md-4">
+
+<img src="UserFiles/Pages/<%=$this->Data->MasterPhoto == 'nophoto.png' ? $this->Data->MasterPhoto : $this->Data->ID.'/thumb/'.$this->Data->MasterPhoto->Name  %>" class="img-responsive"/>
+<a href="<%=$this->Service->constructUrl('Gallery', array('id' => $this->Data->ID)) %>" class="fancybox" rel="zoombox[gallery1]">
+<span class="zoom-icon"></span></a>
+</li>		
+		
+		</prop:ItemTemplate>
+</com:TRepeater>
+
+
+</ul>
+	
+			
+</com:TContent>

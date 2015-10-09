@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration>
+	<pages MasterClass="Application.Layout.AdminBody" Theme="Admin" />
+	<authorization>
+	<allow pages="ForgotPassword,ChangePassword,Client" users="?" />
+		<allow pages="*" users="@" roles="guest" />
+		<deny pages="*" users="?" roles="*" />
+	</authorization>
+</configuration>

@@ -1,0 +1,46 @@
+<com:TContent ID="content">
+
+<h2><%=$this->Site->Name %></h2>
+
+<div class="row box">
+<com:TPanel CssClass="" ID="PageDescitpion" style="padding: 25px;">
+
+
+<%=$this->Site->Description %>
+  
+	<com:TRepeater ID="Gallery" AllowPaging="false">
+		<prop:ItemTemplate>
+		<div class="col-xs-12 col-md-3">
+		<a href="/UserFiles/Pages/<%= $this->getRequest()->itemAt('id') %>/<%= $this->Data->Name %>" 
+		class="thumbnail fancybox" rel="zoombox[gallery1]" title="<%= $this->Data->Name %>">
+		<img src="/UserFiles/Pages/<%= $this->getRequest()->itemAt('id') %>/thumb/<%= $this->Data->Name %>" alt="<%= $this->Data->Name %>"/>
+		</a>
+		</div>
+		</prop:ItemTemplate>
+	</com:TRepeater>
+
+</com:TPanel>
+
+<div style="padding: 25px 0px 25px 25px;">
+<com:TRepeater ID="Sites" AllowPaging="true" PageSize="4" >
+					<prop:ItemTemplate>
+
+<div class="col-md-4 team">
+ <div class="thumbnail">
+ <h2><%= $this->Data->Name %></h2>
+<img src="/UserFiles/Pages/<%=$this->Data->MasterPhoto == 'nophoto.png' ? $this->Data->MasterPhoto : $this->Data->ID.'/thumb/'.$this->Data->MasterPhoto->Name  %>" alt="<%= $this->Data->Name %>"  class="img-responsive img-circle" />
+<%= $this->Data->ShortDescription %>
+</div>
+</div>
+
+
+
+
+
+			
+			
+					</prop:ItemTemplate>
+				</com:TRepeater>	
+			</div>	
+							
+</com:TContent>

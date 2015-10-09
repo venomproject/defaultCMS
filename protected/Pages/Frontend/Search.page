@@ -1,0 +1,36 @@
+<com:TContent ID="content">
+
+<h2>Szukana fraza : <%= $this->Site %></h2>
+
+
+<com:TRepeater ID="Sites" AllowPaging="true" PageSize="4" >
+					<prop:ItemTemplate>
+
+<div class="row box"> 
+
+<div class="col-xs-12 col-md-6 col-sm-6">
+<img src="/UserFiles/Pages/<%=$this->Data->MasterPhoto == 'nophoto.png' ? $this->Data->MasterPhoto : $this->Data->ID.'/thumb/'.$this->Data->MasterPhoto->Name  %>" alt="<%= $this->Data->Name %>"  class="img-responsive" />
+</div>
+<div class="col-xs-12 col-md-6 col-sm-6">
+      <div class="caption">
+     	 <small><%= $this->Data->TitleDate %></small>
+        <h2><%= $this->Data->Name %></h2>
+        <%= $this->Data->ShortDescription %>
+        <a href="<%=$this->Service->constructUrl('Pages', array('id' => $this->Data->ID)) %>" class="pull-right btn btn-default" role="button"><%[TXT_WIECEJ]%></a>
+      </div>
+</div>
+</div>
+					</prop:ItemTemplate>
+				</com:TRepeater>	
+					
+<div class="col-sm-12">
+	<com:TPager ID="Pager"
+    ControlToPaginate="Sites"
+    PageButtonCount="4"
+    Mode="Numeric"
+	ButtonType="LinkButton" 
+    OnPageIndexChanged="pageChanged"
+    />
+	</div>				
+							
+</com:TContent>

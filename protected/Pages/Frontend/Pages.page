@@ -1,0 +1,59 @@
+<com:TContent ID="content">
+
+<section class="title-section">
+<h1><%=$this->Site->Name %></h1>
+</section>
+
+<com:TPanel CssClass="row " ID="PageDescitpion" >
+<div class="col-xs-12 col-md-12">
+
+<%=$this->Site->Description %>
+  
+	<com:TRepeater ID="Gallery" AllowPaging="false">
+		<prop:ItemTemplate>
+		<div class="col-xs-12 col-md-3">
+		<a href="/UserFiles/Pages/<%= $this->getRequest()->itemAt('id') %>/<%= $this->Data->Name %>" 
+		class="thumbnail fancybox" rel="zoombox[gallery1]" title="<%= $this->Data->Name %>">
+		<img src="/UserFiles/Pages/<%= $this->getRequest()->itemAt('id') %>/thumb/<%= $this->Data->Name %>" alt="<%= $this->Data->Name %>"/>
+		</a>
+		</div>
+		</prop:ItemTemplate>
+	</com:TRepeater>
+</div>
+</com:TPanel>
+
+<com:TRepeater ID="Sites" AllowPaging="true" PageSize="4" >
+					<prop:ItemTemplate>
+
+<div class="row " style="margin-bottom: 30px !important;"> 
+
+<div class="col-xs-12 col-md-6 col-sm-3">
+<img src="/UserFiles/Pages/<%=$this->Data->MasterPhoto == 'nophoto.png' ? $this->Data->MasterPhoto : $this->Data->ID.'/thumb/'.$this->Data->MasterPhoto->Name  %>" alt="<%= $this->Data->Name %>"  class="img-responsive" />
+</div>
+<div class="col-xs-12 col-md-6 col-sm-9">
+      <div class="caption">
+     	 <small><%= $this->Data->TitleDate %></small>
+        <h2><%= $this->Data->Name %></h2>
+        <%= $this->Data->ShortDescription %>
+        <a href="<%=$this->Service->constructUrl('Pages', array('id' => $this->Data->ID)) %>" class="pull-right btn btn-primary btn-normal btn-inline" role="button"><%[TXT_WIECEJ]%></a>
+      </div>
+</div>
+</div>
+			
+			
+					</prop:ItemTemplate>
+				</com:TRepeater>	
+				
+	
+					
+<div class="col-sm-12">
+	<com:TPager ID="Pager"
+    ControlToPaginate="Sites"
+    PageButtonCount="4"
+    Mode="Numeric"
+	ButtonType="LinkButton" 
+    OnPageIndexChanged="pageChanged"
+    />
+	</div>				
+							
+</com:TContent>

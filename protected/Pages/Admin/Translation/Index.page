@@ -1,0 +1,61 @@
+<com:TContent ID="content" >
+<div class="content-wrapper">
+        <section class="content-header">
+          <h1>
+		  Frazy statyczne - Tłumaczenie
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Widgets</li>
+          </ol>
+        </section>
+
+        <section class="content">
+         
+ <div class="row">
+            <div class="col-md-12">
+      
+<div class="box box-primary">      
+<div class="box-body">
+         
+<com:TDataGrid ID="DataGrid"  CssClass="table table-hover" AutoGenerateColumns="false"  OnEditCommand="editItem"
+    OnUpdateCommand="saveItem"
+    OnCancelCommand="cancelItem">
+
+<com:TTemplateColumn HeaderText="ID" >
+           <prop:ItemTemplate><%=  $this->Parent->Data->id %>
+           </prop:ItemTemplate>
+           <prop:EditItemTemplate>
+              <%=  $this->Parent->Data->id %>
+           </prop:EditItemTemplate>
+         </com:TTemplateColumn>	
+         
+         <com:TTemplateColumn HeaderText="Fraza" >
+           <prop:ItemTemplate><%=  $this->Parent->Data->source %>
+           </prop:ItemTemplate>
+           <prop:EditItemTemplate>
+              <%=  $this->Parent->Data->source %>
+           </prop:EditItemTemplate>
+         </com:TTemplateColumn>	
+         
+         <com:TBoundColumn ID="TargetTrans" HeaderText="Tłumaczenie" DataField="target" />
+		
+          <com:TTemplateColumn HeaderText="Język" >
+           <prop:ItemTemplate>
+           <img width="30px" src="<%= 'UserFiles/Language/'.$this->Page->languageFlag %>" alt="" />
+           </prop:ItemTemplate>
+           <prop:EditItemTemplate>
+               <img width="30px" src="<%= 'UserFiles/Language/'.$this->Page->languageFlag %>" alt="" />
+           </prop:EditItemTemplate>
+         </com:TTemplateColumn>	
+		
+		  
+		<com:TEditCommandColumn  HeaderText="Edycja" UpdateText="Save"   />
+		
+		
+	</com:TDataGrid>                
+	
+</div> </div> </div>
+</section>
+</div>	
+</com:TContent>

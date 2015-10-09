@@ -1,0 +1,6 @@
+<com:TContent ID="content">
+<div class="row">
+<h2><%=$this->Site->Name %></h2>
+<%=$this->Site->Description %>
+</div>
+</com:TContent>

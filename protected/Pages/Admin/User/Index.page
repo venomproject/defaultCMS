@@ -1,0 +1,119 @@
+<com:TContent ID="content" >
+<div class="content-wrapper">
+	<section class="content-header">
+	  <h1>
+	    Strona : 
+	    <small><%= $this->staticPage->Name %></small>
+	  </h1>
+	  <ol class="breadcrumb">
+	    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+	    <li class="active">Widgets</li>
+	  </ol>
+	</section>
+
+	<section class="content">
+ 		<div class="row">
+ 
+            <div class="col-md-6">
+            
+    <com:TPlaceHolder ID="InCorrect">
+				<div class="alert alert-danger alert-dismissable">
+					<button aria-hidden="true" data-dismiss="alert" class="close"
+						type="button">×</button>
+					<h4>
+						<i class="icon fa fa-check"></i> UWAGA!
+					</h4>
+					Podana nazwa użytkownika już istnieje.
+				</div>
+			</com:TPlaceHolder>        
+            
+
+<div class="box box-primary">        
+<div class="box-body">
+
+	<div class="box-header">
+		<h3 class="box-title">Dodaj użytkownika</h3>
+	</div>
+          
+<div class="form-group">
+	<label>Login</label>
+	<com:TTextBox ID="Login" CssClass="form-control" />
+	<com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Login" Text="* Pole wymagane" CssClass="error-inner" />
+	<com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Login"  CssClass="error-left" />
+</div>
+
+
+<div class="form-group">
+	<label>Hasło</label>
+	<com:TTextBox ID="Password" CssClass="form-control" />
+	<com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Password" Text="* Pole wymagane" CssClass="error-inner" />
+	<com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Password"  CssClass="error-left" />
+</div>
+                    
+</div>
+
+<div class="box-footer">
+	<com:TButton Text="Zapisz" ValidationGroup="req" OnClick="editRow" CssClass="btn btn-primary pull-right"/>
+</div>
+</div>
+
+ </div>
+  
+  		<div class="col-md-6">
+ 		<div class="box box-danger">
+                <div class="box-header">
+                  <h3 class="box-title">List przypisanych użytkowników</h3>
+                  <div class="box-tools">
+                    <div class="input-group">
+                      <div class="input-group-btn">
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+<com:TDataGrid ID="PagesChildren" DataKeyField="ID" CssClass="table table-hover"
+		AutoGenerateColumns="false" 
+		OnDeleteCommand="deleteItem">
+
+		<com:TTemplateColumn HeaderText="Lp" HeaderStyle.Width="30px">
+           <prop:ItemTemplate>
+					<%# $this->Parent->ItemIndex+1%>
+           </prop:ItemTemplate>
+         </com:TTemplateColumn>
+		
+		<com:TBoundColumn  HeaderText="Name" DataField="Name" />
+		
+		<com:TButtonColumn ID="DeleteColumn"  HeaderText="Usuń"
+		HeaderStyle.Width="30px" Text="Delete" CommandName="delete" /> 
+		
+		<prop:EmptyTemplate>
+		
+			<div class="alert  alert-dismissable">
+              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+              <h4><i class="icon fa fa-info"></i> Strona (<%= $this->Page->staticPage->Name %>) nie zawiera przypisanych użytkowników.</h4>
+              <p>W celu dodania nowego kliknij przycisk Dodaj</p>
+            </div>
+		
+		</prop:EmptyTemplate>
+	</com:TDataGrid>                
+</div>
+  
+  
+  
+
+          
+
+                </div>
+                
+                
+              </div>
+       
+
+			</div>
+		</div>
+	</div> 
+</div>  
+</section>
+</div>	
+</com:TContent>

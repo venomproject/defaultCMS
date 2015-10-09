@@ -1,0 +1,244 @@
+<com:TContent ID="content" >
+<div class="content-wrapper">
+	<section class="content-header">
+	  <h1>
+	    Treść : 
+	    <small><%= $this->staticPage->Name %></small>
+	  </h1>
+	  <ol class="breadcrumb">
+	    <li><a href="<%= $this->Service->constructUrl('Pages.Data') %>"><i class="fa fa-dashboard"></i> Treść</a></li>
+<%%
+$l = $this->activeBreadcrumbs;
+foreach($l as $k => $v){
+echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $k)).'">'.$v.'</a></li>';
+}
+%>	
+	  </ol>
+	</section>
+
+	<section class="content">
+ 		<div class="row">
+ 		
+            <div class="col-md-6">
+
+<div class="box box-primary">        
+<div class="box-body">
+
+	<div class="box-header">
+		<h3 class="box-title">Informacje podstawowe</h3>
+	</div>
+          
+<div class="form-group">
+	<label>Nazwa strony</label>
+	<com:TTextBox ID="Name" CssClass="form-control" />
+	<com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Name" Text="* Pole wymagane" CssClass="error-inner" />
+	<com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Name"  CssClass="error-left" />
+</div>
+
+
+ <div class="form-group" style="display:<%= $this->hide == 1 ? 'none' : 'block' %>;">
+ 
+<div class="row">
+<div class="col-md-6">
+                    <label>Cena</label>
+                    <div class="input-group">
+                     <com:TTextBox ID="Price" CssClass="form-control" />
+                    </div>
+
+</div>
+
+<div class="col-md-6">
+                    <label>Stan magazynowy</label>
+                    <div class="input-group">
+                      <com:TTextBox ID="Qty" CssClass="form-control" />
+					  
+                      
+                    </div>
+
+</div>
+
+
+</div>
+                  </div>
+
+<div class="form-group" >
+	<label>Krótki opis strony</label>
+	<com:THtmlArea4 ID="ShortDescription" Width="100%" Height="400px;" CssClass="form-control">
+		<prop:Options>
+			height:"200px",
+			plugins : "textcolor,table, preview,code,media, link, image, imagetools,responsivefilemanager",
+			toolbar1: "styleselect fontsizeselect  | forecolor backcolor table",
+			toolbar2: " undo redo bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent ",
+		    toolbar3: "responsivefilemanager | link unlink | image media | ,code",
+		   	external_filemanager_path:"/lib/filemanager/",
+		   	filemanager_title:"Responsive Filemanager" ,
+		    filemanager_access_key:"das2flF0WdR9u2ASczxQa3a" ,
+		    content_css : "<%= $this->Page->Theme->BaseUrl%>/wysiwyg.css"
+	 	</prop:Options>
+	</com:THtmlArea4>
+</div>
+
+<div class="form-group">
+	<label>Opis strony</label>
+		<com:THtmlArea4 ID="Description"  Width="100%" Height="400px;" CssClass="form-control">
+		<prop:Options>
+			height:"400px",
+			plugins : "textcolor,colorpicker,table, preview,code,media, link, image, imagetools, responsivefilemanager",
+			toolbar1: "styleselect fontsizeselect  | forecolor backcolor table",
+			toolbar2: " undo redo bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent ",
+		    toolbar3: "responsivefilemanager | link unlink | image media | ,code",
+		   	external_filemanager_path:"/lib/filemanager/",
+		   	filemanager_title:"Responsive Filemanager" ,
+		   	filemanager_access_key:"das2flF0WdR9u2ASczxQa3a" ,
+		   	content_css : "<%= $this->Page->Theme->BaseUrl%>/wysiwyg.css"
+	 	</prop:Options>
+		</com:THtmlArea4>
+</div>
+                    
+</div>
+
+<div class="box-footer">
+	<com:TButton Text="Zapisz" ValidationGroup="req" OnClick="editRow" CssClass="btn btn-primary pull-right"/>
+</div>
+</div>
+
+ </div>
+ 
+  		<div class="col-md-6">
+ 		<div class="box box-danger additional">
+                <div class="box-header">
+                  <h3 class="box-title">List podstron</h3>
+                  <div class="box-tools">
+                    <div class="input-group">
+                      <div class="input-group-btn">
+                        <a href="<%=$this->Service->constructUrl("Pages.Add", array('id' => $this->staticPage->ID)) %>" class="btn btn-block btn-primary">Dodaj</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+<com:TDataGrid ID="PagesChildren" DataKeyField="ID" CssClass="table table-hover"
+		AutoGenerateColumns="false" 
+		OnDeleteCommand="deleteItem">
+
+		<com:TTemplateColumn HeaderText="Lp" HeaderStyle.Width="30px">
+           <prop:ItemTemplate>
+					<%# $this->Parent->ItemIndex+1%>
+           </prop:ItemTemplate>
+         </com:TTemplateColumn>
+		
+		<com:TBoundColumn  HeaderText="Nazwa" DataField="Name" />
+		
+		<com:TTemplateColumn HeaderText="Pozycja" >
+           <prop:ItemTemplate>
+           			<com:TImageButton
+				    ImageUrl="<%= $this->Page->Theme->BaseUrl %>/images/up.png"
+				    onCommand="Page.changePosition"
+				    CommandParameter="<%# $this->Parent->Data->ID %>"
+				    CommandName="Top"
+				     />
+           			&nbsp;
+           			<com:TImageButton
+				    ImageUrl="<%= $this->Page->Theme->BaseUrl %>/images/down.png"
+				    onCommand="Page.changePosition"
+				    CommandParameter="<%# $this->Parent->Data->ID %>"
+				    CommandName="Bottom"
+				     />
+           </prop:ItemTemplate>
+         </com:TTemplateColumn>	
+		
+		<com:THyperLinkColumn DataNavigateUrlField="ID"
+		Text="Edit" HeaderStyle.Width="20px" HeaderText="Opcje"
+		DataNavigateUrlFormatString="<%= $this->Service->constructUrl('Pages.Index') %>&id=%d" />
+		
+		<com:TButtonColumn ID="DeleteColumn"  HeaderText="Usuń"
+		HeaderStyle.Width="30px" Text="Delete" CommandName="delete" /> 
+		
+		<prop:EmptyTemplate>
+		
+			<div class="alert  alert-dismissable">
+              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+              <h4><i class="icon fa fa-info"></i> Strona (<%= $this->Page->staticPage->Name %>) nie zawiera podstron.</h4>
+              <p>W celu dodania nowej kliknij przycisk Dodaj</p>
+            </div>
+		
+		</prop:EmptyTemplate>
+	</com:TDataGrid>                
+</div>
+  
+  
+  
+  
+  <div class="box box-default additional" >
+                <div class="box-header with-border">
+                  <h3 class="box-title">Dodatkowe ustawienia</h3>
+                </div>
+                <div class="box-body">
+
+
+
+<div class="form-group">
+<label>Wyświetl wpis :</label>
+  <div class="checkbox">
+	<label>
+		<com:TCheckBox ID="ShowMenu" Text="Górnym Menu" />
+	</label>
+  </div>
+  <div class="checkbox">
+	<label>
+		<com:TCheckBox ID="ShowFooter" Text="Stopce" />
+	</label>
+  </div>
+  <div class="checkbox"  style="display:<%= $this->hideNews == 1 ? 'none' : 'block' %>;">
+	<label>
+		<com:TCheckBox ID="ShowHome" Text="Stronie głównej" />
+	</label>
+  </div>
+</div>
+
+
+          
+<div class="box-header">
+	<h3 class="box-title">Ustawienia SEO</h3>
+</div>
+
+<div class="box-body">   
+	<div class="form-group" style="display:none;">
+		<label>SEO</label>
+		<com:TTextBox ID="Seo" PlaceHolder="seo url" CssClass="form-control" />
+	</div>
+	             
+	<div class="form-group">
+		<label>Meta Keywords</label>
+		<com:TTextBox ID="MetaKeywords" PlaceHolder="Wpisz słowa kluczowe..." CssClass="form-control" />
+	</div>
+
+	<div class="form-group">
+		<label>Meta Description</label>
+		<com:TTextBox ID="MetaDescription" TextMode="MultiLine" PlaceHolder="Opis strony" CssClass="form-control" />
+	</div>
+</div>
+
+                </div>
+                
+                
+<div class="box-footer">
+	<com:TButton Text="Zapisz" ValidationGroup="req" OnClick="editRow" CssClass="btn btn-primary pull-right"/>
+</div>
+
+<script type="text/javascript">
+if(<%= $this->User->PagesID %> > 0)
+jQuery('.additional').hide();
+</script>
+
+              </div>
+       
+
+	   <com:GalleryAdminBox/>	
+			</div>
+		</div>
+	</div> 
+</div>  
+</section>
+</div>	
+</com:TContent>

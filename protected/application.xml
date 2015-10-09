@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application id="personal" mode="Debug">
+  <paths>
+  	<using namespace="Application.UserFiles.*" />
+    <using namespace="Application.StaticBlocks.*" />
+    <using namespace="Application.DataBase.*" />
+    <using namespace="Application.Global.*" />
+	<using namespace="System.Web.UI.ActiveControls.*" />
+	<using namespace="System.I18N.*"/>
+	<alias id="UserFiles" path="../UserFiles" />
+	<alias id="Lib" path="../lib" />
+	<alias id="ctrl" path="controls" />
+  </paths>
+  <include file="Application.dbconfig" />
+  <include file="Application.seo" />	
+<modules>
+  <module id="auth" class="System.Security.TAuthManager" UserManager="User" LoginPage="Login"/>
+  <module id="User" class="System.Security.TDbUserManager" UserClass="Application.BlogUser" />
+  <module id="globalization" class="TGlobalization" Culture="pl"  DefaultCulture="pl" defaultCharset="UTF-8" >
+  	 <translation type="Database" source="db" marker="@@" autosave="true" cache="false"/> 
+  	<!-- <translation type="XLIFF" source="Application.Translation" marker="@@" autosave="true" catalogue="ttt"/> -->  
+  </module>
+  
+<module id="Session" class="THttpSession" SessionName="SSID" CookieMode="Only" UseCustomStorage="false" AutoStart="true" GCProbability="1" UseTransparentSessionID="false" TimeOut="3600" />
+
+  <module id="cache" class="System.Caching.TDbCache" PrimaryCache="false" />
+  <module id="error" class="TErrorHandler" ErrorTemplatePath="Application.ErrorTemplates"/>
+</modules>
+  <services>
+	<service id="demo" class="TPageService" BasePath="Application.Pages.Admin" DefaultPage="Home" />
+	<service id="page" class="TPageService" BasePath="Application.Pages.Frontend" DefaultPage="Home" />
+  </services>
+</application>

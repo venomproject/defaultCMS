@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /assets/
+Disallow: /lib/
+Disallow: /themes/
+Disallow: /UserFiles/
+Disallow: /framework/

@@ -1,0 +1,32 @@
+<com:TContent ID="content" >
+
+<div class="login-box">
+  <div class="login-logo">
+    <a href="<%=$this->Service->constructUrl("Home") %>">
+    <img src="<%=$this->Page->Theme->BaseUrl%>/images/venomcms.png" width="180" alt="" />
+    </a>
+  </div>
+  
+  <div class="login-box-body">
+     
+    <com:TCustomValidator ControlToValidate="Password" ValidationGroup="req" Text="Błędny login lub hasło" Display="Dynamic" OnServerValidate="validateUser"/>
+    
+      <div class="form-group has-feedback">
+      	<com:TTextBox ID="Username" CssClass="form-control" PlaceHolder="Login" />
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      	<com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Username" Text="pole wymagane" CssClass="text-red"/>
+
+      </div>
+      <div class="form-group has-feedback">
+      	<com:TTextBox ID="Password" TextMode="Password"  CssClass="form-control" PlaceHolder="Password"/>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+     	<com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Password" Text="pole wymagane" CssClass="text-red" />
+      </div>
+      <div class="form-group has-feedback">
+        	<com:TButton Text="Zaloguj" ValidationGroup="req" OnClick="Login_Clicked" CssClass="btn btn-primary btn-block btn-flat"/>
+      </div>
+      
+
+  </div>
+</div>
+</com:TContent>

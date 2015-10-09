@@ -1,0 +1,55 @@
+<com:TContent ID="content">
+
+
+<div class="row">
+
+<div class="col-md-4" >
+
+<section class="title-section">
+<h1 style="padding-left:0;"><%=$this->Site->Name %></h1>
+</section>
+	<%=$this->Site->Description %>
+</div>
+
+  <div class="col-md-8">
+ 
+ <section class="title-section">
+<h1>FORMULARZ KONTAKTOWY</h1>
+</section>
+  
+  <com:TActiveLabel Text="" ID="confirmLabel" />
+    <div class="col-sm-6">
+      <com:TTextBox ID="Name" CssClass="form-control" PlaceHolder="Nazwa"/>
+      <com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Name" Text="" CssClass="glyphicon glyphicon-remove form-control-feedback"/>
+      </div>
+    <div class="col-sm-6">
+      <com:TTextBox ID="Email" CssClass="form-control" PlaceHolder="Email"/>
+      <com:TEmailAddressValidator
+    ValidationGroup="req"
+    ControlToValidate="Email"
+    Text="" 
+    CssClass="glyphicon glyphicon-remove form-control-feedback"/>
+<com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Email" Text="" CssClass="glyphicon glyphicon-remove form-control-feedback"/>
+
+  </div>
+  
+    <div class="col-sm-12" style="margin-top:10px;">
+         <com:TTextBox TextMode="MultiLine" Rows="6" Columns="41" CssClass="form-control" ID="Message" PlaceHolder="Wiadomość"/>
+         <com:TRequiredFieldValidator ValidationGroup="req" ControlToValidate="Message" Text="" CssClass="glyphicon glyphicon-remove form-control-feedback"/>
+    </div>
+
+<div class="col-sm-12" style="margin-top:10px;">
+    <com:TButton Text="Wyślij" ValidationGroup="req"
+		OnClick="sendMessage" CssClass="btn btn-primary btn-normal btn-inline "/>
+  </div>
+  
+
+	</div>
+</div>
+<br/>
+<div class="col-sm-12">
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9879.936686469235!2d19.459076!3d51.751613!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x005db66d0d595e91!2sAQUAPROJEKT+s.c.+Biuro+In%C5%BCynierii+Wodnej%2C+%C5%9Arodowiska+i+Melioracji!5e0!3m2!1spl!2spl!4v1430305919963" width="100%" height="350px"  frameborder="0" style="border:0"></iframe>
+</div>
+
+
+</com:TContent>
