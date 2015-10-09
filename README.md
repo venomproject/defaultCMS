@@ -1,0 +1,2 @@
+# defaultCMS
+standard
