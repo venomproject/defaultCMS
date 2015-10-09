@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 $basePath=dirname(__FILE__);
-$frameworkPath=$basePath.'/framework/prado.php';
+$frameworkPath=$basePath.'/../framework/prado.php';
 $assetsPath=$basePath.'/assets';
 
 if(!is_writable($assetsPath))

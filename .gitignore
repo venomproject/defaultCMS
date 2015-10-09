@@ -2,3 +2,5 @@
 /protected/runtime/
 /lib/filemanager/thumbs/
 /lib/filemanager/source/
+index.php
+/protected/dbconfig.xml
