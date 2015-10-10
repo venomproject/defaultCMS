@@ -8,10 +8,8 @@ class LeftAdmin extends TTemplateControl {
 		
 		$this->ActLang = $langID;
 		
-		if ($this->User->PagesID == 0 || $this->User->Roles [0] == 'admin') {
 			$this->PagesParent->DataSource = PagesRecord::finder ()->findAll ( 'PageID IS NULL AND LanguageID = ?', $langID );
 			$this->PagesParent->dataBind ();
-		}
 		
 		$m = null;
 		if ($this->getPage ()->getPagePath () == 'Pages.Index' || $this->getPage ()->getPagePath () == 'Pages.Add') {

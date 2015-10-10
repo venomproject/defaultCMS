@@ -20,7 +20,6 @@ class BlogUser extends TDbUser
 			$user->Name = $username;
 			$user->Roles=($userRecord->Role==1 ? 'admin' : 'user');
 			$user->IsGuest=false;
-			$user->PagesID=$userRecord->PagesID;
 			return $user;
 		}
 	}

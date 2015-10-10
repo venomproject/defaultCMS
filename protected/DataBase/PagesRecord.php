@@ -27,13 +27,19 @@ class PagesRecord extends TActiveRecord
 	
 	public $TitleDate;
 	public $ShowDate;
+	public $ShowDateDiff;
 	
 	public $PageID; // NULL - parent
+	public $PagesID; // NULL - parent
+	
 	public $Seo;
 	public $MetaKeywords;
 	public $MetaDescription;
 	public $Other; // additional serialization data
-	public $Position; 
+	public $Position;
+
+	public $HideDate;
+	public $HideDateDiff;
 	
 	public $Price;
 	public $Qty;

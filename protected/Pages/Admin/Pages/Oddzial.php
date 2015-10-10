@@ -1,5 +1,5 @@
 <?php
-class Data extends TPage {
+class Oddzial extends TPage {
 	public $QtyPage = 0;
 	public function onLoad($param) {
 		parent::onLoad ( $param );
@@ -15,8 +15,8 @@ class Data extends TPage {
 	protected function getData($offset, $limit) {
 		$session = Prado::getApplication ()->getSession ();
 		$langID = $session->itemAt ( 'jezyk' );
-		//$this->DataGrid->DataSource = PagesRecord::finder ()->findAll ( 'LanguageID = ? AND PageID is Null ORDER BY Position', $langID );
-		$this->DataGrid->DataSource = PagesRecord::finder ()->findAll ( 'LanguageID = ?  ORDER BY Position', $langID );
+		$clientID = $this->User->PagesID;
+		$this->DataGrid->DataSource = PagesRecord::finder ()->findAll ( 'LanguageID = ? AND PageID = ? ORDER BY Position', $langID ,$clientID);
 		return $this->DataGrid->dataBind ();
 	}
 	public function pageChanged($sender, $param) {
@@ -70,16 +70,15 @@ class Data extends TPage {
 		$this->Response->redirect ( $this->Service->constructUrl ('Pages.Data') );
 	}
 	protected function checkPosition($langID) {
-	
+		$clientID = $this->User->PagesID;
 		$i = 1;
-		//foreach (PagesRecord::finder ()->findAll( 'LanguageID = ? AND PageID is Null ORDER BY Position', $langID ) as $row){
-		foreach (PagesRecord::finder ()->findAll( 'LanguageID = ?   ORDER BY Position', $langID ) as $row){
+		foreach (PagesRecord::finder ()->findAll( 'LanguageID = ? AND PageID = ? ORDER BY Position', $langID, $clientID ) as $row){
 			$rows = PagesRecord::finder ()->findByID ($row->ID);
 			$rows->Position = $i*10;
 			$rows->save ();
 			$i++;
 		}
-		return $i-1;
+		return $i;
 	
 	}
 }

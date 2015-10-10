@@ -2,18 +2,13 @@
 class Add extends TPage {
 	public $staticPage;
 	public $activeBreadcrumbs = null;
-	public $hide = 1;
-	public $hideNews = 1;
-	
 	public function onLoad($param) {
 		parent::onLoad ( $param );
 		
 		$this->staticPage->Name = 'Nowa strona główna';
 		if (! $this->getPage ()->IsPostBack) {
-		//	$rows->ShowDate = $this->ShowDate->setText (date('d-m-Y')) ;
-		//	$rows->TitleDate =  $this->TitleDate->setText (date('d-m-Y')) ;
-			$this->Price->setText (0.00) ;
-			$this->Qty->setText (0) ;
+			$rows->ShowDate = $this->ShowDate->setText (date('d-m-Y')) ;
+			$rows->TitleDate =  $this->TitleDate->setText (date('d-m-Y')) ;
 		}
 		
 		if ($this->getRequest ()->contains ( "id" ) == true) {
@@ -21,10 +16,9 @@ class Add extends TPage {
 			$langID = $session->itemAt ( 'jezyk' );
 			$parentID = $this->getRequest ()->itemAt ( "id" );
 			$this->staticPage = PagesRecord::finder ()->find ( 'ID = ? AND LanguageID = ?', $parentID, $langID );
-			
-			
+
 			$m = $this->getRequest ()->itemAt ( "id" );
-			
+				
 			if ($m != null) {
 				do {
 					$b = PagesRecord::finder ()->find ( 'ID = ?', $m );
@@ -34,21 +28,9 @@ class Add extends TPage {
 			}
 			ksort($this->activeBreadcrumbs);
 			
-			
-			if(isset($this->activeBreadcrumbs[4])){
-				$this->hide = 0;
-			}
-				
-			if(isset($this->activeBreadcrumbs[4]) || isset($this->activeBreadcrumbs[13])){
-				$this->hideNews = 0;
-			}
-				
-			
 		} else {
 		//	$this->Response->redirect ( $this->Service->constructUrl ( "Pages.Index" ,array("id" => 1)) );
 		}
-		
-		
 		
 	}
 	public function editRow($sender, $param) {
@@ -70,24 +52,23 @@ class Add extends TPage {
 			$rows->MetaKeywords = TPropertyValue::ensureString ( $this->MetaKeywords->getSafeText () );
 			$rows->MetaDescription = TPropertyValue::ensureString ( $this->MetaDescription->getSafeText () );
 			$rows->LanguageID = $langID;
-			//$rows->ShowDate = TPropertyValue::ensureString ( $this->ShowDate->getSafeText () );
-			//$rows->TitleDate = TPropertyValue::ensureString ( $this->TitleDate->getSafeText () );
+			$rows->ShowDate = TPropertyValue::ensureString ( $this->ShowDate->getSafeText () );
+			$rows->ShowDateDiff = strtotime($this->ShowDate->getSafeText ());
+			$rows->TitleDate = TPropertyValue::ensureString ( $this->TitleDate->getSafeText () );
 			
-			$rows->Price = TPropertyValue::ensureString ( $this->Price->getSafeText () );
-			$rows->Qty = TPropertyValue::ensureString ( $this->Qty->getSafeText () );
-					
-			if($this->User->PagesID == 0){
 				$rows->ShowMenu =  $this->ShowMenu->getChecked ();
 				$rows->ShowFooter =  $this->ShowFooter->getChecked ();
 				$rows->ShowHome =  $this->ShowHome->getChecked ();
-			}
-			if(isset($this->activeBreadcrumbs[4])){
-				$rows->Other =  4;
-			}
+					if ($this->ShowHome->getChecked () == true){
+						$rows->HideDate = TPropertyValue::ensureString ( $this->HideDate->getSafeText () );
+						$rows->HideDateDiff = strtotime($this->HideDate->getSafeText ());
+					}else{
+						$rows->HideDate = null;
+						$rows->HideDateDiff = 0;
+					}
 			
-			if(isset($this->activeBreadcrumbs[13])){
-				$rows->Other =  13;
-			}
+			
+			
 			
 			$rows->save ();
  
@@ -110,10 +91,12 @@ class Add extends TPage {
 					$namePhoto = strtolower($entry);
 					$row = new FilesRecord ();
 					$row->Name = $namePhoto;
+					
 					$row->IsParent = 0;
 					if(FilesRecord::finder ()->count('PagesID = ? AND IsParent = 1', $rows->ID ) == 0){
 						$row->IsParent = 1;
 					}
+					
 					$row->Position = 999;
 					$row->PagesID = $rows->ID;
 					$row->save ();

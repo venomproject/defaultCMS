@@ -40,7 +40,7 @@
 				  <div class="box-tools">
                     <div class="input-group">
                       <div class="input-group-btn">
-                        <a href="<%=$this->Service->constructUrl("Pages.Add") %>" class="btn btn-block btn-primary">Dodaj</a>
+                        <a href="<%=$this->Service->constructUrl("Newsletter.Add") %>" class="btn btn-block btn-primary">Dodaj</a>
                       </div>
                     </div>
                   </div>
@@ -55,10 +55,10 @@
 		PagerStyle.HorizontalAlign="Center" Width="100%"
 		PagerStyle.Visible="false"
 		OnDeleteCommand="deleteItem" 
-		AllowPaging="true"	PageSize="100"
+		AllowPaging="true"	PageSize="10"
 		>
 
-		<com:TTemplateColumn HeaderText="Lp" >
+		<com:TTemplateColumn HeaderText="Lp" HeaderStyle.Width="20px">
            <prop:ItemTemplate>
 					<%# $this->Parent->ItemIndex+1%>
            </prop:ItemTemplate>
@@ -66,38 +66,37 @@
          
 		<com:TBoundColumn ID="Name" HeaderText="Nazwa" DataField="Name" />
 		
-		<com:TTemplateColumn HeaderText="Pozycja" >
+		
+		<com:TTemplateColumn HeaderText="Status" ID="Status" HeaderStyle.Width="25px">
            <prop:ItemTemplate>
-					<com:TImageButton
-				    ImageUrl="<%= $this->Page->Theme->BaseUrl %>/images/up.png"
-				    onCommand="Page.changePosition"
-				    CommandParameter="<%# $this->Parent->Data->ID %>"
-				    CommandName="Top"
-				     />
-           			&nbsp;
-           			<com:TImageButton
-				    ImageUrl="<%= $this->Page->Theme->BaseUrl %>/images/down.png"
-				    onCommand="Page.changePosition"
-				    CommandParameter="<%# $this->Parent->Data->ID %>"
-				    CommandName="Bottom"
-				     />
-           </prop:ItemTemplate>
+            
+<%= $this->Parent->Data->Status == 1 ? ' <!-- ' : " "%>	
+<com:TImageButton
+    ImageUrl='<%= $this->Page->Theme->BaseUrl%>/images/active.png' CssClass="del"  OnCommand="Page.OffRow" CommandName="<%# $this->Parent->Data->ID %>"
+/>
+<%= $this->Parent->Data->Status == 1 ? ' --> ' : " "%>
+
+<%= $this->Parent->Data->Status == 1 ? '  ' : " <!-- "%>	
+<com:TImageButton
+    ImageUrl='<%= $this->Page->Theme->BaseUrl%>/images/unactive.png'  OnCommand="Page.OnRow"   CommandName="<%# $this->Parent->Data->ID %>"
+/>
+<%= $this->Parent->Data->Status == 1 ? '  ' : "  --> "%>
+
+            </prop:ItemTemplate>
          </com:TTemplateColumn>	
-         
+         	
+		
 		
 		<com:THyperLinkColumn DataNavigateUrlField="ID"
-		Text="Edycja" HeaderStyle.Width="20px" HeaderText="Opcje"
+		Text="Edit" HeaderStyle.Width="20px" HeaderText="Opcje"
 		ItemStyle.CssClass="edit_row"
-		DataNavigateUrlFormatString="<%= $this->Service->constructUrl('Pages.Index') %>&id=%d" />
+		DataNavigateUrlFormatString="<%= $this->Service->constructUrl('Newsletter.Index') %>&id=%d" />
 		
-			<com:THyperLinkColumn DataNavigateUrlField="ID"
-		Text="Kopia" HeaderStyle.Width="20px" HeaderText="Kopia"
-		DataNavigateUrlFormatString="<%= $this->Service->constructUrl('Pages.Index') %>&kopiaId=%d" />
 		
 		<com:TButtonColumn ID="DeleteColumn" HeaderText="Usuń"
 		HeaderStyle.Width="30px"
 		ItemStyle.CssClass="delete_row"
-		Text="Usuń" CommandName="delete" />
+		Text="Delete" CommandName="delete" />
 		
 		<prop:EmptyTemplate>
 		

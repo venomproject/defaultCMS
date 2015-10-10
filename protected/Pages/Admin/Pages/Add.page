@@ -5,7 +5,7 @@
 	    Treść : 
 	    <small><%= $this->staticPage->Name %></small>
 	  </h1>
-	   <ol class="breadcrumb">
+	  <ol class="breadcrumb">
 	    <li><a href="<%= $this->Service->constructUrl('Pages.Data') %>"><i class="fa fa-dashboard"></i> Treść</a></li>
 <%%
 $l = $this->activeBreadcrumbs;
@@ -42,21 +42,28 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 
 
 
- <div class="form-group" style="display:<%= $this->hide == 1 ? 'none' : 'block' %>;">
+ <div class="form-group">
  
 <div class="row">
 <div class="col-md-6">
-                    <label>Cena</label>
+                    <label>Data wpisu</label>
                     <div class="input-group">
-                     <com:TTextBox ID="Price" CssClass="form-control" />
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+					  <com:TDatePicker Mode="Clickable" CssClass="form-control" ID="TitleDate"  />
+                      
                     </div>
 
 </div>
 
 <div class="col-md-6">
-                    <label>Stan magazynowy</label>
+                    <label>Data publikacji</label>
                     <div class="input-group">
-                      <com:TTextBox ID="Qty" CssClass="form-control" />
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+					  <com:TDatePicker Mode="Clickable" CssClass="form-control" ID="ShowDate"  />
 					  
                       
                     </div>
@@ -124,7 +131,7 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
                 <div class="box-body">
 
 
-
+<div class="col-md-6">
 <div class="form-group">
 <label>Wyświetl wpis :</label>
   <div class="checkbox">
@@ -137,14 +144,29 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 		<com:TCheckBox ID="ShowFooter" Text="Stopce" />
 	</label>
   </div>
-  <div class="checkbox"  style="display:<%= $this->hideNews == 1 ? 'none' : 'block' %>;">
+  <div class="checkbox">
 	<label>
 		<com:TCheckBox ID="ShowHome" Text="Stronie głównej" />
 	</label>
+	 
   </div>
+</div>
+</div>
+<div class="col-md-6" id="hideDate">
+
+ <label>Data końcowa</label>
+  <div class="input-group">
+    <div class="input-group-addon">
+      <i class="fa fa-calendar"></i>
+    </div>
+  	<com:TDatePicker Mode="Clickable" CssClass="form-control" ID="HideDate"  />
+	</div>
+
 </div>
 
 
+<!-- 
+<div style="clear:both;"></div>
           
 <div class="box-header">
 	<h3 class="box-title">Ustawienia SEO</h3>
@@ -166,7 +188,7 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 		<com:TTextBox ID="MetaDescription" TextMode="MultiLine" PlaceHolder="Opis strony" CssClass="form-control" />
 	</div>
 </div>
-
+ -->
                 </div>
                 
                 
@@ -175,13 +197,6 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 </div>
 
 
-<script type="text/javascript">
-if(<%= $this->User->PagesID %> > 0)
-jQuery('.additional').hide();
-</script>
-              </div>  		
-  		
-  		
   		
 	   <com:GalleryAdminBox/>	
 			</div>

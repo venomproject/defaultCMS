@@ -51,6 +51,10 @@
 
 <li class="treeview"><a href="<%=$this->Service->constructUrl("Settings.Index")%>"><i class="fa fa-gears"></i><span>Ustawienia</span></a></li>
 
+
+<li class="treeview"><a href="<%=$this->Service->constructUrl("Newsletter.Data")%>"><i class="fa fa-comments-o"></i><span>Newsletter</span></a></li>
+
+
 <!-- 
 		    <li class="treeview"><a href="<%=$this->Service->constructUrl("Language.Index", array('id' => $this->ActLang))%>"><i class="fa fa-flag-checkered"></i><span>Języki</span></a></li>
 		  <li class="treeview"><a href="<%=$this->Service->constructUrl("Translation.Index", array('id' => $this->ActLang))%>"><i class="fa fa-flag-checkered"></i><span>Tłumaczenia</span></a></li>

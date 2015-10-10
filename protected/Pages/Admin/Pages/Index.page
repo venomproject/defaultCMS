@@ -36,21 +36,27 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 </div>
 
 
- <div class="form-group" style="display:<%= $this->hide == 1 ? 'none' : 'block' %>;">
+ <div class="form-group">
  
 <div class="row">
 <div class="col-md-6">
-                    <label>Cena</label>
+                    <label>Data wpisu</label>
                     <div class="input-group">
-                     <com:TTextBox ID="Price" CssClass="form-control" />
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+					  <com:TDatePicker Mode="Clickable" CssClass="form-control" ID="TitleDate"  />
                     </div>
 
 </div>
 
 <div class="col-md-6">
-                    <label>Stan magazynowy</label>
+                    <label>Data publikacji</label>
                     <div class="input-group">
-                      <com:TTextBox ID="Qty" CssClass="form-control" />
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+					  <com:TDatePicker Mode="Clickable" CssClass="form-control" ID="ShowDate"  />
 					  
                       
                     </div>
@@ -111,7 +117,7 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
                   <div class="box-tools">
                     <div class="input-group">
                       <div class="input-group-btn">
-                        <a href="<%=$this->Service->constructUrl("Pages.Add", array('id' => $this->staticPage->ID)) %>" class="btn btn-block btn-primary">Dodaj</a>
+                        <a href="<%=$this->Service->constructUrl("Pages.Add", array('id' => $this->staticPage->ID)) %>" class="btn btn-block btn-primary">Nowa strona</a>
                       </div>
                     </div>
                   </div>
@@ -148,11 +154,17 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
          </com:TTemplateColumn>	
 		
 		<com:THyperLinkColumn DataNavigateUrlField="ID"
-		Text="Edit" HeaderStyle.Width="20px" HeaderText="Opcje"
+		Text="Edycja" HeaderStyle.Width="20px" HeaderText="Edycja"
+		ItemStyle.CssClass="edit_row"
 		DataNavigateUrlFormatString="<%= $this->Service->constructUrl('Pages.Index') %>&id=%d" />
 		
+		<com:THyperLinkColumn DataNavigateUrlField="ID"
+		Text="Kopia" HeaderStyle.Width="20px" HeaderText="Kopia"
+		DataNavigateUrlFormatString="<%= $this->Service->constructUrl('Pages.Index') %>&kopiaId=%d" />
+		
 		<com:TButtonColumn ID="DeleteColumn"  HeaderText="Usuń"
-		HeaderStyle.Width="30px" Text="Delete" CommandName="delete" /> 
+		ItemStyle.CssClass="delete_row"
+		HeaderStyle.Width="30px" Text="Usuń" CommandName="delete" /> 
 		
 		<prop:EmptyTemplate>
 		
@@ -175,7 +187,7 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
                 </div>
                 <div class="box-body">
 
-
+<div class="col-md-6">
 
 <div class="form-group">
 <label>Wyświetl wpis :</label>
@@ -189,13 +201,28 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 		<com:TCheckBox ID="ShowFooter" Text="Stopce" />
 	</label>
   </div>
-  <div class="checkbox"  style="display:<%= $this->hideNews == 1 ? 'none' : 'block' %>;">
+  <div class="checkbox">
 	<label>
 		<com:TCheckBox ID="ShowHome" Text="Stronie głównej" />
 	</label>
   </div>
 </div>
+</div>
+<div class="col-md-6" id="hideDate">
 
+ <label>Data końcowa</label>
+  <div class="input-group">
+    <div class="input-group-addon">
+      <i class="fa fa-calendar"></i>
+    </div>
+  	<com:TDatePicker Mode="Clickable" CssClass="form-control" ID="HideDate"  />
+	</div>
+
+</div>
+
+
+<!-- 
+<div style="clear:both;"></div>
 
           
 <div class="box-header">
@@ -218,7 +245,7 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 		<com:TTextBox ID="MetaDescription" TextMode="MultiLine" PlaceHolder="Opis strony" CssClass="form-control" />
 	</div>
 </div>
-
+ -->
                 </div>
                 
                 
@@ -226,10 +253,6 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 	<com:TButton Text="Zapisz" ValidationGroup="req" OnClick="editRow" CssClass="btn btn-primary pull-right"/>
 </div>
 
-<script type="text/javascript">
-if(<%= $this->User->PagesID %> > 0)
-jQuery('.additional').hide();
-</script>
 
               </div>
        
