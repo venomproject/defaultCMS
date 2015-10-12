@@ -4,12 +4,11 @@ class Data extends TPage {
 	public function onLoad($param) {
 		parent::onLoad ( $param );
 		if (! $this->getPage ()->IsPostBack) {
-		
-			$this->QtyPage = $this->checkPosition ( );
+			
+			$this->QtyPage = $this->checkPosition ();
 			$this->populateData ();
 		}
 	}
-	
 	protected function getData($offset, $limit) {
 		$this->DataGrid->DataSource = nNewsletterRecord::finder ()->findAll ();
 		return $this->DataGrid->dataBind ();
@@ -28,17 +27,36 @@ class Data extends TPage {
 		$this->DataGrid->dataBind ();
 	}
 	public function deleteItem($sender, $param) {
+		$nID = $this->DataGrid->DataKeys [$param->Item->ItemIndex];
+		$lID = nLayoutRecord::finder ()->findBy_nNewsletterID ( $nID );
 		
-		nNewsletterRecord::finder ()->deleteByPk ( $this->DataGrid->DataKeys [$param->Item->ItemIndex] );
-		$this->Response->redirect ( $this->Service->constructUrl ( "Newsletter.Data") );			
+		if (isset ( $lID->ID )) {
+			nSenderRecord::finder ()->deleteAllBy_nLayoutID ( $lID->ID );
+			nLayoutRecord::finder ()->deleteBy_nNewsletterID ( $nID );
+		}
+		nNewsletterRecord::finder ()->deleteBy_ID ( $nID );
+		
+		$this->populateData ();
+		
+		$this->Correct->Visible = true;
+		$this->Alert->Visible = false;
 	}
-	
 	protected function checkPosition() {
 		$i = 0;
-		foreach (nNewsletterRecord::finder ()->findAll() as $row){
-			$i++;
+		foreach ( nNewsletterRecord::finder ()->findAll () as $row ) {
+			$i ++;
 		}
 		return $i;
+	}
+	
+	public function ChangeStatusNewsletter($sender,$param)
+	{
+		$rowData = nNewsletterRecord::finder()->findByID($param->CommandName);
+			$rowData->Status = $param->CommandParameter;
+		$rowData->save();
+	
+	
+		$this->Response->redirect($this->Service->constructUrl("Newsletter.Data"));
 	}
 }
 ?>

@@ -32,11 +32,5 @@ class Add extends TPage {
 		}
 		$this->Response->redirect ( $this->Service->constructUrl ( "Newsletter.Data" ) );
 	}
-	public function deleteItem($sender, $param) {
-		PagesRecord::finder ()->deleteByPk ( $this->PagesChildren->DataKeys [$param->Item->ItemIndex] );
-		$this->Response->redirect ( $this->Service->constructUrl ( "Pages.Index", array (
-				"id" => 1 
-		) ) );
-	}
 }
 ?>
