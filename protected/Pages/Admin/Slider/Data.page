@@ -40,7 +40,7 @@
 				  <div class="box-tools">
                     <div class="input-group">
                       <div class="input-group-btn">
-                        <a href="<%=$this->Service->constructUrl("Newsletter.Add") %>" class="btn btn-block btn-primary">Dodaj</a>
+                        <a href="<%=$this->Service->constructUrl("Slider.Add") %>" class="btn btn-block btn-primary">Dodaj</a>
                       </div>
                     </div>
                   </div>
@@ -67,30 +67,30 @@
 		<com:TBoundColumn ID="Name" HeaderText="Nazwa" DataField="Name" />
 		
 		
-		<com:TTemplateColumn HeaderText="Status" ID="Status" HeaderStyle.Width="25px">
+         
+		<com:TTemplateColumn HeaderText="Pozycja" >
            <prop:ItemTemplate>
-            
-<%= $this->Parent->Data->Status == 1 ? ' <!-- ' : " "%>	
-<com:TImageButton
-    ImageUrl='<%= $this->Page->Theme->BaseUrl%>/images/active.png' CssClass="del" CommandParameter="1"  OnCommand="Page.ChangeStatusNewsletter" CommandName="<%# $this->Parent->Data->ID %>"
-/>
-<%= $this->Parent->Data->Status == 1 ? ' --> ' : " "%>
-
-<%= $this->Parent->Data->Status == 1 ? '  ' : " <!-- "%>	
-<com:TImageButton
-    ImageUrl='<%= $this->Page->Theme->BaseUrl%>/images/unactive.png'  OnCommand="Page.ChangeStatusNewsletter"  CommandParameter="0"  CommandName="<%# $this->Parent->Data->ID %>"
-/>
-<%= $this->Parent->Data->Status == 1 ? '  ' : "  --> "%>
-
-            </prop:ItemTemplate>
-         </com:TTemplateColumn>	
-         	
+					<com:TImageButton
+				    ImageUrl="<%= $this->Page->Theme->BaseUrl %>/images/up.png"
+				    onCommand="Page.changePosition"
+				    CommandParameter="<%# $this->Parent->Data->ID %>"
+				    CommandName="Top"
+				     />
+           			&nbsp;
+           			<com:TImageButton
+				    ImageUrl="<%= $this->Page->Theme->BaseUrl %>/images/down.png"
+				    onCommand="Page.changePosition"
+				    CommandParameter="<%# $this->Parent->Data->ID %>"
+				    CommandName="Bottom"
+				     />
+           </prop:ItemTemplate>
+         </com:TTemplateColumn>		
 		
 		
 		<com:THyperLinkColumn DataNavigateUrlField="ID"
 		Text="Edit" HeaderStyle.Width="20px" HeaderText="Opcje"
 		ItemStyle.CssClass="edit_row"
-		DataNavigateUrlFormatString="<%= $this->Service->constructUrl('Newsletter.Index') %>&id=%d" />
+		DataNavigateUrlFormatString="<%= $this->Service->constructUrl('Slider.Index') %>&id=%d" />
 	
 		
 		<com:TButtonColumn ID="DeleteColumn" HeaderText="Usuń"

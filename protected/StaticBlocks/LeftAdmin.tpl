@@ -54,6 +54,7 @@
 
 <li class="treeview"><a href="<%=$this->Service->constructUrl("Newsletter.Data")%>"><i class="fa fa-comments-o"></i><span>Newsletter</span></a></li>
 
+<li class="treeview"><a href="<%=$this->Service->constructUrl("Slider.Data")%>"><i class="fa fa-picture-o"></i> <span>Slider</span></a></li>
 
 <!-- 
 		    <li class="treeview"><a href="<%=$this->Service->constructUrl("Language.Index", array('id' => $this->ActLang))%>"><i class="fa fa-flag-checkered"></i><span>Języki</span></a></li>
