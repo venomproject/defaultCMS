@@ -20,7 +20,7 @@ class Newsletter extends TPage {
 			'X-Mailer: PHP/' . phpversion ();
 			$message = '<html><body>';
 			
-			$lista = nSenderRecord::finder ()->findAll ( 'nLayoutID = ? AND Status = 0 LIMIT 1', $layout->ID );
+			$lista = nSenderRecord::finder ()->findAll ( 'nLayoutID = ? AND Status = 0 LIMIT 25', $layout->ID );
 			foreach ( $lista as $person ) {
 				
 				$to = $person->Email;
