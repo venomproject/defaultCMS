@@ -14,7 +14,7 @@ class Add extends TPage {
 			$rows->save ();
 			
 			$lay = new nLayoutRecord ();
-			$lay->PlaneText = TPropertyValue::ensureString ( $this->PlaneText->getText () );
+			//$lay->PlaneText = TPropertyValue::ensureString ( $this->PlaneText->getText () );
 			$lay->HtmlText = TPropertyValue::ensureString ( $this->HtmlText->getText () );
 			$lay->nNewsletterID = $rows->ID;
 			$lay->save ();
@@ -22,15 +22,18 @@ class Add extends TPage {
 			$mailList = explode ( ";", $this->SendDescription->getText () );
 			foreach ( $mailList as $email ) {
 				if (filter_var ( trim ( $email ), FILTER_VALIDATE_EMAIL )) {
-					$send = new nSenderRecord ();
-					$send->Email = trim ( $email );
-					$send->Status = 0;
-					$send->nLayoutID = $lay->ID;
-					$send->save ();
+					
+					if (! nSenderRecord::finder ()->findBy_nLayoutID_AND_Email ( $lay->ID, trim ( $email ) )) {
+						$send = new nSenderRecord ();
+						$send->Email = trim ( $email );
+						$send->Status = 0;
+						$send->nLayoutID = $lay->ID;
+						$send->save ();
+					}
 				}
 			}
+			$this->Response->redirect ( $this->Service->constructUrl ( "Newsletter.Data" ) );
 		}
-		$this->Response->redirect ( $this->Service->constructUrl ( "Newsletter.Data" ) );
 	}
 }
 ?>

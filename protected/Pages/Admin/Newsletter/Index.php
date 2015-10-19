@@ -11,11 +11,11 @@ class Index extends TPage {
 			if (! $this->getPage ()->IsPostBack) {
 				$lay = nLayoutRecord::finder ()->findBy_nNewsletterID ( $this->getRequest ()->itemAt ( "id" ) );
 				TPropertyValue::ensureString ( $this->Name->setText ( $this->staticPage->Name ) );
-				TPropertyValue::ensureString ( $this->PlaneText->setText ( $lay->PlaneText ) );
+				//TPropertyValue::ensureString ( $this->PlaneText->setText ( $lay->PlaneText ) );
 				TPropertyValue::ensureString ( $this->HtmlText->setText ( $lay->HtmlText ) );
 				
 				$senderList = '';
-				foreach ( nSenderRecord::finder ()->findAllBy_nLayoutID ( $lay->ID ) as $row ) {
+				foreach ( nSenderRecord::finder ()->findAll ( 'nLayoutID = ? AND Status != 2', $lay->ID ) as $row ) {
 					$senderList .= $row->Email . ';';
 				}
 				$this->SendDescription->setText ( $senderList );
@@ -25,7 +25,6 @@ class Index extends TPage {
 		}
 	}
 	public function editRow($sender, $param) {
-		
 		if ($this->IsValid) {
 			$rows = nNewsletterRecord::finder ()->findBy_nNewsletterID ( $this->getRequest ()->itemAt ( "id" ) );
 			$rows->Name = TPropertyValue::ensureString ( $this->Name->getSafeText () );
@@ -33,21 +32,24 @@ class Index extends TPage {
 			$rows->save ();
 			
 			$lay = nLayoutRecord::finder ()->findBy_nNewsletterID ( $this->getRequest ()->itemAt ( "id" ) );
-			$lay->PlaneText = TPropertyValue::ensureString ( $this->PlaneText->getText () );
+		//	$lay->PlaneText = TPropertyValue::ensureString ( $this->PlaneText->getText () );
 			$lay->HtmlText = TPropertyValue::ensureString ( $this->HtmlText->getText () );
 			$lay->nNewsletterID = $rows->ID;
 			$lay->save ();
 			
-			nSenderRecord::finder ()->deleteAllBy_nLayoutID ( $lay->ID );
+			nSenderRecord::finder ()->deleteAll ( 'nLayoutID = ? AND Status != 2', $lay->ID );
 			
 			$mailList = explode ( ";", $this->SendDescription->getText () );
 			foreach ( $mailList as $email ) {
 				if (filter_var ( trim ( $email ), FILTER_VALIDATE_EMAIL )) {
-					$send = new nSenderRecord ();
-					$send->Email = trim ( $email );
-					$send->Status = 0;
-					$send->nLayoutID = $lay->ID;
-					$send->save ();
+					
+					if (! nSenderRecord::finder ()->findBy_nLayoutID_AND_Email ( $lay->ID, trim ( $email ) )) {
+						$send = new nSenderRecord ();
+						$send->Email = trim ( $email );
+						$send->Status = 0;
+						$send->nLayoutID = $lay->ID;
+						$send->save ();
+					}
 				}
 			}
 		}

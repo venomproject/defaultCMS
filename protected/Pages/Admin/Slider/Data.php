@@ -10,7 +10,7 @@ class Data extends TPage {
 		}
 	}
 	protected function getData($offset, $limit) {
-		$this->DataGrid->DataSource = SliderRecord::finder ()->findAll ();
+		$this->DataGrid->DataSource = SliderRecord::finder ()->findAll ('ORDER BY Position');
 		return $this->DataGrid->dataBind ();
 	}
 	public function pageChanged($sender, $param) {
