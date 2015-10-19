@@ -1,4 +1,5 @@
 <?php
+Prado::using ( 'Lib.PHPMailer.PHPMailerAutoload' );
 class Newsletter extends TPage {
 	public $Site;
 	public function onLoad($param) {
@@ -9,33 +10,26 @@ class Newsletter extends TPage {
 			
 			$layout = nLayoutRecord::finder ()->findBy_nNewsletterID ( $checkNewsletter->ID );
 			
-			$subject = $checkNewsletter->Name;
-			$from = 'test@vp.d2.pl';
-			$headers = 'MIME-Version: 1.0' . "\r\n";
-			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-			$headers .= 'From: ' . $from . "\r\n" . 
-
-			'Reply-To: ' . $from . "\r\n" . 
-
-			'X-Mailer: PHP/' . phpversion ();
-			$message = '<html><body>';
+			$mail = new PHPMailer ();
+			$mail->isSendmail ();
+			$mail->setFrom ( 'from@vp.d2.pl', 'First Last' );
+			$mail->addReplyTo ( 'from@vp.d2.pl' );
 			
 			$lista = nSenderRecord::finder ()->findAll ( 'nLayoutID = ? AND Status = 0 LIMIT 25', $layout->ID );
 			foreach ( $lista as $person ) {
 				
-				$to = $person->Email;
+				$mail->addAddress ( $person->Email );
+				$mail->Subject = $checkNewsletter->Name;
+				$mail->msgHTML ( $layout->HtmlText );
 				
-				$message .= $layout->HtmlText;
-				$message .= '</body></html>';
-				
-				if (mail ( $to, $subject, $message, $headers )) {
-					
+				if ($mail->send ()) {
 					$person->Status = 1;
 					$person->save ();
 				} else {
 					
 					$person->Status = 5;
 					$person->save ();
+					echo "Mailer Error: " . $mail->ErrorInfo;
 				}
 			}
 			
