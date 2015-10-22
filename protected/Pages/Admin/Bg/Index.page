@@ -1,0 +1,91 @@
+<com:TContent ID="content">
+	<div class="content-wrapper">
+		<section class="content-header">
+			<h1>
+				Treść : <small></small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li class="active">Widgets</li>
+			</ol>
+		</section>
+
+		<section class="content">
+			<div class="row">
+				<div class="col-md-6">
+
+					<div class="box box-primary">
+						<div class="box-body">
+
+							<div class="box-header">
+								<h3 class="box-title">Informacje:</h3>
+							</div>
+
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<th style="width: 10px">#</th>
+										<th>Strona</th>
+										<th>Nazwa pliku</th>
+									</tr>
+									<tr>
+										<td>1.</td>
+										<td>Domyślny</td>
+										<td>bg1.jpg</td>
+									</tr>
+									<tr>
+										<td>2.</td>
+										<td>Aktualnosci</td>
+										<td>bg2.jpg</td>
+									</tr>
+									<tr>
+										<td>3.</td>
+										<td>O firmie</td>
+										<td>bg3.jpg</td>
+									</tr>
+									<tr>
+										<td>4.</td>
+										<td>Wynajem</td>
+										<td>bg4.jpg</td>
+									</tr>
+									<tr>
+										<td>5.</td>
+										<td>Sprzedaż</td>
+										<td>bg5.jpg</td>
+									</tr>
+									<tr>
+										<td>6.</td>
+										<td>Serwis</td>
+										<td>bg6.jpg</td>
+									</tr>
+									<tr>
+										<td>7.</td>
+										<td>Kontakt</td>
+										<td>bg7.jpg</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+
+						<div class="box-footer">
+							<com:TButton Text="Zapisz" ValidationGroup="req"
+								OnClick="editRow" CssClass="btn btn-primary pull-right" />
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-md-6">
+					<div class="row">   
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<com:UploadFileAdminBox/>	
+			            </div>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	</section>
+	</div>
+</com:TContent>
