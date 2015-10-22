@@ -6,8 +6,8 @@
             <small></small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Widgets</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Język</a></li>
+            <li class="active"><%= $this->staticPage->MasterName %></li>
           </ol>
         </section>
 
@@ -69,11 +69,11 @@
 		<com:TBoundColumn  HeaderText="Nazwa" DataField="MasterName" />
 		
 		<com:THyperLinkColumn DataNavigateUrlField="cat_id"
-		Text="Edit" HeaderStyle.Width="20px" HeaderText="Opcje"
+		Text="Edit" ItemStyle.CssClass="edit_row" HeaderStyle.Width="20px" HeaderText="Opcje"
 		DataNavigateUrlFormatString="<%= $this->Service->constructUrl('Language.Index') %>&id=%d" />
 
 		<com:TButtonColumn ID="DeleteColumn" HeaderText="Usuń"
-				HeaderStyle.Width="30px"
+				HeaderStyle.Width="30px" ItemStyle.CssClass="delete_row"
 				 Text="Delete" CommandName="delete" />
 		
 		<prop:EmptyTemplate>

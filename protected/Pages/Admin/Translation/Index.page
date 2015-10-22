@@ -5,8 +5,7 @@
 		  Frazy statyczne - Tłumaczenie
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Widgets</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Tłumaczenie</a></li>
           </ol>
         </section>
 
@@ -50,7 +49,7 @@
          </com:TTemplateColumn>	
 		
 		  
-		<com:TEditCommandColumn  HeaderText="Edycja" UpdateText="Save"   />
+		<com:TEditCommandColumn  HeaderText="Edycja" UpdateText="Save" ItemStyle.CssClass="edit_row"  />
 		
 		
 	</com:TDataGrid>                

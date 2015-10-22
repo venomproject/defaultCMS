@@ -6,8 +6,8 @@
             <small>domyślny Polski</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Widgets</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Język</a></li>
+            <li class="active">Dodaj</li>
           </ol>
         </section>
 
