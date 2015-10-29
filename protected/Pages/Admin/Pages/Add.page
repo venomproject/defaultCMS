@@ -81,7 +81,7 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 	<com:THtmlArea4 ID="ShortDescription" Width="100%" Height="400px;" CssClass="form-control">
 		<prop:Options>
 			height:"200px",			
-			plugins : "textcolor,table, preview,code,media, link, image, imagetools,responsivefilemanager",
+			plugins : "textcolor,colorpicker,table, preview,code,media, link, image, imagetools,responsivefilemanager",
 			toolbar1: "styleselect fontsizeselect  | forecolor backcolor table",
 			toolbar2: " undo redo bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent ",
 		    toolbar3: "responsivefilemanager | link unlink | image media | ,code",
