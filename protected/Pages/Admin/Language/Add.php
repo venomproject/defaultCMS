@@ -43,6 +43,8 @@ class Add extends TPage {
 				$new->LangCode = $short;
 				$new->PageID = $page->PageID;
 				$new->Protected = $page->Protected;
+				$new->Position = $page->Position;
+				$new->ShowMenu = $page->ShowMenu;
 				$new->save();
 			}
 			
@@ -65,6 +67,7 @@ class Add extends TPage {
 				$newS->Key = $set->Key;
 				$newS->Value = $rows->ShortName.' : '.$set->Value;
 				$newS->LanguageID = $rows->cat_id;
+				$newS->LangCode = $short;
 				$newS->save();
 			}
 			

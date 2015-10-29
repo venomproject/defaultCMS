@@ -52,6 +52,7 @@ class Add extends TPage {
 			$rows->MetaKeywords = TPropertyValue::ensureString ( $this->MetaKeywords->getSafeText () );
 			$rows->MetaDescription = TPropertyValue::ensureString ( $this->MetaDescription->getSafeText () );
 			$rows->LanguageID = $langID;
+			$rows->LangCode = CatalogueRecord::finder ()->find ( 'cat_id = ?', $langID )->ShortName;
 			$rows->ShowDate = TPropertyValue::ensureString ( $this->ShowDate->getSafeText () );
 			$rows->ShowDateDiff = strtotime($this->ShowDate->getSafeText ());
 			$rows->TitleDate = TPropertyValue::ensureString ( $this->TitleDate->getSafeText () );

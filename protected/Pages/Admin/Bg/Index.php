@@ -3,6 +3,12 @@ class Index extends TPage {
 	public $staticPage;
 	public function onLoad($param) {
 		parent::onLoad ( $param );
+		
+		if (! is_dir ( Prado::getPathOfAlias ( 'UserFiles' ) . '/Bg/' )) {
+			$dirun = dir ( Prado::getPathOfAlias ( 'UserFiles' ) );
+			mkdir ( $dirun->path . '/Bg/', 0775 );
+			$dirun->close ();
+		}
 	}
 	
 	public function editRow($sender, $param) {

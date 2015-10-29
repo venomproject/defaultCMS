@@ -17,6 +17,7 @@ class SettingsRecord extends TActiveRecord
 	public $Value;
 	public $LanguageID;
 	public $LangCode;
+	public $Hide;
 	
 	/**
 	* @param string $className
