@@ -189,7 +189,7 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 
 <div class="col-md-6">
 
-<div class="form-group">
+	<div class="form-group">
 <label>Wyświetl wpis :</label>
   <div class="checkbox">
 	<label>
@@ -208,23 +208,25 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
   </div>
 </div>
 </div>
-<div class="col-md-6" id="hideDate">
 
- <label>Data końcowa</label>
-  <div class="input-group">
-    <div class="input-group-addon">
-      <i class="fa fa-calendar"></i>
-    </div>
-  	<com:TDatePicker Mode="Clickable" CssClass="form-control" ID="HideDate"  />
-	</div>
-
-</div>
-
-
-<!-- 
 <div style="clear:both;"></div>
+  
 
-          
+ <div class="box-body">   
+	<div class="form-group">
+		<label>Przenieś wpis</label>
+		
+		<com:TDropDownList ID="OtherPages" PromptText="---" 
+    AutoPostBack="false"
+    DataTextField="Name"
+    DataValueField="ID"
+	CssClass="form-control"
+    />
+		
+	</div>
+</div>	
+  
+  
 <div class="box-header">
 	<h3 class="box-title">Ustawienia SEO</h3>
 </div>
@@ -245,7 +247,6 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 		<com:TTextBox ID="MetaDescription" TextMode="MultiLine" PlaceHolder="Opis strony" CssClass="form-control" />
 	</div>
 </div>
- -->
                 </div>
                 
                 

@@ -60,6 +60,9 @@ class Data extends TPage {
 			$this->Correct->Visible = false;
 		}
 	}
+	
+	
+	
 	public function changePosition($sender, $param) {
 		$rows = PagesRecord::finder ()->findByID ($param->getCommandParameter ());
 		if($param->getCommandName () == 'Top')

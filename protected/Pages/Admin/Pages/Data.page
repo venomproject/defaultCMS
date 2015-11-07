@@ -84,6 +84,7 @@
            </prop:ItemTemplate>
          </com:TTemplateColumn>	
          
+		 
 		
 		<com:THyperLinkColumn DataNavigateUrlField="ID"
 		Text="Edycja" HeaderStyle.Width="20px" HeaderText="Opcje"

@@ -40,12 +40,12 @@ class Add extends TPage {
 			
 			$rows = new PagesRecord ();
 			$rows->Name = TPropertyValue::ensureString ( $this->Name->getSafeText () );
-			
+			/*
 			if($this->User->PagesID == 0)
 			$rows->PageID = $this->getRequest ()->itemAt ( "id" );
 			else
 				$rows->PageID = $this->User->PagesID;
-			
+			*/
 			$rows->Description = TPropertyValue::ensureString ( $this->Description->getText ());
 			$rows->ShortDescription = TPropertyValue::ensureString ( $this->ShortDescription->getText () );
 			$rows->Seo = TPropertyValue::ensureString ( $this->Seo->getSafeText () );

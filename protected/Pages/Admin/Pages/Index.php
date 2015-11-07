@@ -31,14 +31,14 @@ class Index extends TPage {
 				$rows->MetaKeywords = $clone->MetaKeywords;
 				$rows->MetaDescription = $clone->MetaDescription;
 				
-				$rows->PageID = $clone->PageID;
+				//$rows->PageID = $clone->PageID;
 				$rows->Other = $clone->Other;
 				$rows->Position = $clone->Position;
 				
 				$rows->save ();
 				
 				$this->Response->redirect ( $this->Service->constructUrl ( "Pages.Index", array (
-						"id" => $this->getRequest ()->itemAt ( "kopiaId" ) 
+						"id" => $rows->ID
 				) ) );
 			} else {
 				$this->Response->redirect ( $this->Service->constructUrl ( "Pages.Data" ) );
@@ -87,6 +87,12 @@ class Index extends TPage {
 				
 				$this->PagesChildren->DataSource = PagesRecord::finder ()->findAll ( 'Protected = 0 AND PageID = ? AND LanguageID = ? ORDER BY Position', $parentID, $langID );
 				$this->PagesChildren->dataBind ();
+				
+            $this->OtherPages->DataSource=PagesRecord::finder ()->findAll ('ORDER BY Name');
+            $this->OtherPages->dataBind();
+			
+			$this->OtherPages->setSelectedValue($this->staticPage->PageID);
+				
 			}
 		} else {
 			$this->Response->redirect ( $this->Service->constructUrl ( "Pages.Add" ) );
@@ -100,6 +106,7 @@ class Index extends TPage {
 		) ) );
 	}
 	public function editRow($sender, $param) {
+		
 		if ($this->IsValid) {
 			$finder = PagesRecord::finder ();
 			$finder->DbConnection->Active = true;
@@ -115,9 +122,11 @@ class Index extends TPage {
 				$rows->ShowDate = TPropertyValue::ensureString ( $this->ShowDate->getSafeText () );
 				$rows->ShowDateDiff = strtotime($this->ShowDate->getSafeText ());
 				
+				$rows->PageID = $this->OtherPages->getData();
+				
 				$rows->TitleDate = TPropertyValue::ensureString ( $this->TitleDate->getSafeText () );
 				
-				if ($this->User->PagesID == 0) {
+				
 					$rows->ShowMenu = $this->ShowMenu->getChecked ();
 					$rows->ShowFooter = $this->ShowFooter->getChecked ();
 					$rows->ShowHome = $this->ShowHome->getChecked ();
@@ -128,7 +137,6 @@ class Index extends TPage {
 						$rows->HideDate = null;
 						$rows->HideDateDiff = 0;
 					}	
-				}
 				
 				$rows->save ();
 				
@@ -146,7 +154,7 @@ class Index extends TPage {
 						}
 						
 						$row->Position = 999;
-						$row->PagesID = $this->getRequest ()->itemAt ( "id" );
+						//$row->PagesID = $this->getRequest ()->itemAt ( "id" );
 						$row->save ();
 						
 						copy ( $baseMethod->UploadFilePath . $entry, Prado::getPathOfAlias ( 'UserFiles' ) . '/Pages/' . $this->getRequest ()->itemAt ( "id" ) . '/' . $namePhoto ) or die ( "Błąd przy kopiowaniu" );
@@ -161,6 +169,8 @@ class Index extends TPage {
 				) ) );
 			} catch ( Exception $e ) {
 				$transaction->rollBack ();
+				print_r($e);
+				echo 'a';
 				die ();
 			}
 		}

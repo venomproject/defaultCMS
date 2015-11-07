@@ -152,20 +152,7 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
   </div>
 </div>
 </div>
-<div class="col-md-6" id="hideDate">
 
- <label>Data końcowa</label>
-  <div class="input-group">
-    <div class="input-group-addon">
-      <i class="fa fa-calendar"></i>
-    </div>
-  	<com:TDatePicker Mode="Clickable" CssClass="form-control" ID="HideDate"  />
-	</div>
-
-</div>
-
-
-<!-- 
 <div style="clear:both;"></div>
           
 <div class="box-header">
@@ -188,7 +175,6 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 		<com:TTextBox ID="MetaDescription" TextMode="MultiLine" PlaceHolder="Opis strony" CssClass="form-control" />
 	</div>
 </div>
- -->
                 </div>
                 
                 
@@ -196,7 +182,7 @@ echo '<li><a href="'.$this->Service->constructUrl("Pages.Index", array("id" => $
 	<com:TButton Text="Zapisz" ValidationGroup="req" OnClick="editRow" CssClass="btn btn-primary pull-right"/>
 </div>
 
-
+</div>
   		
 	   <com:GalleryAdminBox/>	
 			</div>
